@@ -54,7 +54,7 @@ type PipelineConfig struct {
 	MongoConfig      *MongoConfigs     `toml:"mongo" json:"mongo"`
 	MySQLConfig      *MySQLConfig      `toml:"mysql" json:"mysql"`
 	SourceTiDBConfig *SourceTiDBConfig `toml:"source-tidb" json:"source-tidb"`
-	SourceProbeCfg   *SourceProbeCfg   `toml:"source-probe-config" json:"source-probe-config"`
+	SourceProbeCfg   *SourceProbeCfg   `toml:"source-probe-configs" json:"source-probe-configs"`
 
 	KafkaGlobalConfig *KafkaGlobalConfig `toml:"kafka-global" json:"kafka-global"`
 
@@ -62,17 +62,17 @@ type PipelineConfig struct {
 	// RouteMode, DynamicKafkaRouteConfig, StaticKafkaRouteConfig, and DBRoutes
 	// are route related configuration
 	RouteMode string `toml:"route-mode" json:"route-mode"`
-	// DynamicKafkaRouteConfig *router.DynamicKafkaRouteConfig `toml:"dynamic-route-config" json:"dynamic-route-config"`
-	// StaticKafkaRouteConfig  *router.StaticKafkaRouteConfig  `toml:"static-route-config" json:"static-route-config"`
+	// DynamicKafkaRouteConfig *router.DynamicKafkaRouteConfig `toml:"dynamic-route-configs" json:"dynamic-route-configs"`
+	// StaticKafkaRouteConfig  *router.StaticKafkaRouteConfig  `toml:"static-route-configs" json:"static-route-configs"`
 	// DBRoutes                []router.DBRouteConfig          `toml:"db-routes" json:"db-routes"`
 
-	TableConfig []*TableConfig `toml:"table-config" json:"table-config"`
+	TableConfig []*TableConfig `toml:"table-configs" json:"table-configs"`
 
 	TargetMySQL *DBConfig `toml:"target-mysql" json:"target-mysql"`
 
 	TargetMySQLWorkerCfg *TargetMySQLWorkerConfig `toml:"target-mysql-worker" json:"target-mysql-worker"`
 
-	// WorkerPoolConfig *worker_pool.WorkerPoolConfig `toml:"worker-pool-config" json:"worker-pool-config"`
+	// WorkerPoolConfig *worker_pool.WorkerPoolConfig `toml:"worker-pool-configs" json:"worker-pool-configs"`
 
 	//
 	// internal configurations that is not exposed to users
@@ -105,7 +105,7 @@ type MongoSource struct {
 type MongoConfigs struct {
 	MongoSources   []MongoSource    `toml:"mongo-sources" json:"mongo-sources"`
 	PositionSource *MongoConnConfig `toml:"position-conn" json:"position-conn"`
-	GtmConfig      *GtmConfig       `toml:"gtm-config" json:"gtm-config"`
+	GtmConfig      *GtmConfig       `toml:"gtm-configs" json:"gtm-configs"`
 }
 
 type MySQLConfig struct {
@@ -185,7 +185,7 @@ type TargetMySQLWorkerConfig struct {
 	Plugins            []string `toml:"plugins" json:"plugins"`
 }
 
-// NewConfig creates a new config.
+// NewConfig creates a new configs.
 func NewConfig() *Config {
 	cfg := &Config{}
 	cfg.PipelineConfig = PipelineConfigV3{}
@@ -193,7 +193,7 @@ func NewConfig() *Config {
 	fs := cfg.FlagSet
 
 	fs.BoolVar(&cfg.Version, "V", false, "print version and exit")
-	fs.StringVar(&cfg.ConfigFile, "config", "", "path to config file")
+	fs.StringVar(&cfg.ConfigFile, "configs", "", "path to configs file")
 	fs.StringVar(&cfg.Log.Level, "L", "info", "log level: debug, info, warn, error, fatal (default 'info')")
 	fs.StringVar(&cfg.Log.File.Filename, "log-file", "", "log file path")
 	fs.StringVar(&cfg.Log.Format, "log-format", "json", "log format")
@@ -206,7 +206,7 @@ func NewConfig() *Config {
 func LoadConfigFromFile(path string) *Config {
 	cfg := &Config{}
 	if err := cfg.ConfigFromFile(path); err != nil {
-		panic(fmt.Sprintf("failed to load config %v", err))
+		panic(fmt.Sprintf("failed to load configs %v", err))
 	}
 	return cfg
 }
@@ -222,7 +222,7 @@ func NewConfigFromString(configString string) (*Config, error) {
 
 // ParseCmd parses flag definitions from argument list
 func (c *Config) ParseCmd(arguments []string) error {
-	// ParseCmd first to get config file.
+	// ParseCmd first to get configs file.
 	err := c.FlagSet.Parse(arguments)
 	if err != nil {
 		return errors.Trace(err)
@@ -235,7 +235,7 @@ func (c *Config) ParseCmd(arguments []string) error {
 	return nil
 }
 
-// ConfigFromFile loads config from file.
+// ConfigFromFile loads configs from file.
 func (c *Config) ConfigFromFile(path string) error {
 	if strings.HasSuffix(path, ".toml") {
 		_, err := toml.DecodeFile(path, &c.PipelineConfig)

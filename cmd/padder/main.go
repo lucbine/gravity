@@ -2,7 +2,7 @@ package main
 
 // main is the bootstrap.
 //func main() {
-//	cfg := config.NewConfig()
+//	cfg := configs.NewConfig()
 //	err := cfg.ParseCmd(os.Args[1:])
 //	switch errors.Cause(err) {
 //	case nil:
@@ -13,14 +13,14 @@ package main
 //	}
 //
 //	if cfg.ConfigFile == "" {
-//		log.Fatalf("config file is required")
+//		log.Fatalf("configs file is required")
 //	}
 //
 //	if err := cfg.CreateConfigFromFile(cfg.ConfigFile); err != nil {
-//		log.Fatalf("failed to load config from file. %v", err)
+//		log.Fatalf("failed to load configs from file. %v", err)
 //	}
-//	if err = config.Validate(cfg.PadderConfig); err != nil {
-//		log.Fatalf("config validation failed: %v", err)
+//	if err = configs.Validate(cfg.PadderConfig); err != nil {
+//		log.Fatalf("configs validation failed: %v", err)
 //	}
 //	logutil.MustInitLogger(&cfg.Log)
 //	utils.LogRawInfo("padder")

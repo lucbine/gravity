@@ -48,7 +48,7 @@ type Config struct {
 
 func main() {
 	var (
-		config = flag.String("config", "verifier.conf", "path to config file")
+		config = flag.String("configs", "verifier.conf", "path to configs file")
 	)
 
 	flag.Parse()
@@ -56,7 +56,7 @@ func main() {
 	c := &Config{}
 	_, err := toml.DecodeFile(*config, c)
 	if err != nil {
-		log.Fatalf("error parse config. %s", err)
+		log.Fatalf("error parse configs. %s", err)
 	}
 
 	source, err := utils.CreateDBConnection(c.Source)

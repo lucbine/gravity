@@ -52,7 +52,7 @@ func (output *ElasticsearchOutput) Configure(pipelineName string, data map[strin
 	// setup output
 	output.pipelineName = pipelineName
 
-	// setup plugin config
+	// setup plugin configs
 	pluginConfig := ElasticsearchPluginConfig{}
 
 	err := mapstructure.Decode(data, &pluginConfig)
@@ -61,7 +61,7 @@ func (output *ElasticsearchOutput) Configure(pipelineName string, data map[strin
 	}
 
 	if pluginConfig.ServerConfig == nil {
-		return errors.Errorf("empty elasticsearch config")
+		return errors.Errorf("empty elasticsearch configs")
 	}
 
 	if len(pluginConfig.ServerConfig.URLs) == 0 {

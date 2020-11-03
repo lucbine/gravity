@@ -35,7 +35,7 @@ type MySQLPluginConfig struct {
 	DBConfig     *config.DBConfig            `mapstructure:"target"  json:"target"`
 	Routes       []map[string]interface{}    `mapstructure:"routes"  json:"routes"`
 	EnableDDL    bool                        `mapstructure:"enable-ddl" json:"enable-ddl"`
-	EngineConfig *config.GenericPluginConfig `mapstructure:"sql-engine-config"  json:"sql-engine-config"`
+	EngineConfig *config.GenericPluginConfig `mapstructure:"sql-engine-configs"  json:"sql-engine-configs"`
 }
 
 type MySQLOutput struct {
@@ -63,7 +63,7 @@ func init() {
 func (output *MySQLOutput) Configure(pipelineName string, data map[string]interface{}) error {
 	output.pipelineName = pipelineName
 
-	// setup plugin config
+	// setup plugin configs
 	pluginConfig := MySQLPluginConfig{}
 	err := mapstructure.Decode(data, &pluginConfig)
 	if err != nil {
@@ -71,7 +71,7 @@ func (output *MySQLOutput) Configure(pipelineName string, data map[string]interf
 	}
 
 	if pluginConfig.DBConfig == nil {
-		return errors.Errorf("empty db config")
+		return errors.Errorf("empty db configs")
 	}
 
 	if pluginConfig.EngineConfig == nil {

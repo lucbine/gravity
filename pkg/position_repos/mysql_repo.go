@@ -55,11 +55,11 @@ func IsPositionStoreEvent(schemaName string, tableName string) bool {
 }
 
 //
-// [input.config.position-repo]
+// [input.configs.position-repo]
 // type = "mongo-repo"
-// [input.config.position-repo.config]
+// [input.configs.position-repo.configs]
 // annotation = ...
-// [input.config.position-repo.config.source]
+// [input.configs.position-repo.configs.source]
 // host = ...
 // port = ...
 //

@@ -36,7 +36,7 @@ import (
 //
 // [[filters]]
 // type = "grpc-sidecar"
-// [filters.config]
+// [filters.configs]
 // binary-url = "some url"
 // name = "some name"
 

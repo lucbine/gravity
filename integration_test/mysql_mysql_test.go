@@ -649,7 +649,7 @@ func TestMySQLBatchWithCompositePkIntOrder(t *testing.T) {
 // 		},
 // 	}
 //
-// 	pipelineConfig := config.PipelineConfigV2{
+// 	pipelineConfig := configs.PipelineConfigV2{
 // 		PipelineName: t.Name(),
 // 		InputPlugins: map[string]interface{}{
 // 			"mysql": map[string]interface{}{
@@ -892,7 +892,7 @@ func TestMySQLBatchWithInsertIgnore(t *testing.T) {
 					"port":     targetDBConfig.Port,
 				},
 				"enable-ddl": true,
-				"sql-engine-config": &config.GenericPluginConfig{
+				"sql-engine-configs": &config.GenericPluginConfig{
 					Type: "mysql-insert-ignore",
 				},
 				"routes": []map[string]interface{}{

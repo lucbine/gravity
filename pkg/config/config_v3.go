@@ -61,10 +61,10 @@ func (mode InputMode) Valid() error {
 type InputConfig struct {
 	Type   string                 `yaml:"type"  json:"type"  toml:"type"`
 	Mode   InputMode              `yaml:"mode" json:"mode" toml:"mode"`
-	Config map[string]interface{} `yaml:"config"  json:"config"  toml:"config"`
+	Config map[string]interface{} `yaml:"configs"  json:"configs"  toml:"configs"`
 }
 
 type GenericPluginConfig struct {
 	Type   string                 `yaml:"type"  json:"type"  toml:"type"`
-	Config map[string]interface{} `yaml:"config"  json:"config,omitempty"  toml:"config,omitempty"`
+	Config map[string]interface{} `yaml:"configs"  json:"configs,omitempty"  toml:"configs,omitempty"`
 }

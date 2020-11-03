@@ -24,7 +24,7 @@ type PluginConfig struct {
 	Source        *config.MongoConnConfig     `mapstructure:"source" toml:"source" json:"source"`
 	PositionRepo  *config.GenericPluginConfig `mapstructure:"position-repo" toml:"position-repo" json:"position-repo"`
 	StartPosition *config.MongoPosition       `mapstructure:"start-position" toml:"start-position" json:"start-position"`
-	GtmConfig     *config.GtmConfig           `mapstructure:"gtm-config" toml:"gtm-config" json:"gtm-config"`
+	GtmConfig     *config.GtmConfig           `mapstructure:"gtm-configs" toml:"gtm-configs" json:"gtm-configs"`
 }
 
 type mongoStreamInputPlugin struct {
@@ -50,7 +50,7 @@ func init() {
 	registry.RegisterPlugin(registry.InputPlugin, Name, &mongoStreamInputPlugin{}, false)
 }
 
-// TODO position store, gtm config, etc
+// TODO position store, gtm configs, etc
 func (plugin *mongoStreamInputPlugin) Configure(pipelineName string, data map[string]interface{}) error {
 	plugin.pipelineName = pipelineName
 

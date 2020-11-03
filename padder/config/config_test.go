@@ -24,8 +24,8 @@ schema = "test"
 binlog-name= "bin.001"
 binlog-pos= 1234`
 
-var _ = Describe("config test", func() {
-	It("read config normally", func() {
+var _ = Describe("configs test", func() {
+	It("read configs normally", func() {
 		config, err := config.CreateConfigFromString(confStr)
 		Expect(err).To(BeNil())
 		Expect(config).NotTo(BeNil())
@@ -57,7 +57,7 @@ var _ = Describe("config test", func() {
 		Expect(errors.IsNotValid(err)).To(BeTrue())
 	})
 
-	It("require mysql config", func() {
+	It("require mysql configs", func() {
 		conf, _ := config.CreateConfigFromString(confStr)
 		padderConfig := conf.PadderConfig
 		padderConfig.MySQLConfig = nil
@@ -65,7 +65,7 @@ var _ = Describe("config test", func() {
 		Expect(errors.IsNotValid(err)).To(BeTrue())
 	})
 
-	It("require mysql start position config", func() {
+	It("require mysql start position configs", func() {
 		conf, _ := config.CreateConfigFromString(confStr)
 		padderConfig := conf.PadderConfig
 		padderConfig.MySQLConfig.StartPosition = nil
@@ -73,7 +73,7 @@ var _ = Describe("config test", func() {
 		Expect(errors.IsNotValid(err)).To(BeTrue())
 	})
 
-	It("require mysql target config", func() {
+	It("require mysql target configs", func() {
 		conf, _ := config.CreateConfigFromString(confStr)
 		padderConfig := conf.PadderConfig
 		padderConfig.MySQLConfig.Target = nil

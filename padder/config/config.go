@@ -31,7 +31,7 @@ func NewConfig() *Config {
 	cfg.FlagSet = flag.NewFlagSet("padder", flag.ContinueOnError)
 	fs := cfg.FlagSet
 
-	fs.StringVar(&cfg.ConfigFile, "config", "", "path to config file")
+	fs.StringVar(&cfg.ConfigFile, "configs", "", "path to configs file")
 	fs.BoolVar(&cfg.PreviewMode, "preview", false, "preview mode")
 	fs.StringVar(&cfg.Log.Level, "L", "info", "log level: debug, info, warn, error, fatal (default 'info')")
 	fs.StringVar(&cfg.Log.File.Filename, "log-file", "", "log file path")
@@ -64,23 +64,23 @@ func CreateConfigFromString(configString string) (*Config, error) {
 
 func Validate(cfg PadderConfig) error {
 	if len(cfg.BinLogList) == 0 {
-		return errors.NotValidf("bin log list are required. config is")
+		return errors.NotValidf("bin log list are required. configs is")
 	}
 	if cfg.MySQLConfig == nil {
-		return errors.NotValidf("mysql config is required. config is")
+		return errors.NotValidf("mysql configs is required. configs is")
 	}
 	// either LogPos&&LogName or GTID?
 	if cfg.MySQLConfig.StartPosition == nil {
-		return errors.NotValidf("start position is required. config is")
+		return errors.NotValidf("start position is required. configs is")
 	}
 	if cfg.MySQLConfig.Target == nil {
-		return errors.NotValidf("mysql target is required. config is")
+		return errors.NotValidf("mysql target is required. configs is")
 	}
 	if err := cfg.MySQLConfig.Target.ValidateAndSetDefault(); err != nil {
-		return errors.NotValidf("mysql config validates failed. %v, config is", err)
+		return errors.NotValidf("mysql configs validates failed. %v, configs is", err)
 	}
 	if cfg.MySQLConfig.Target.Schema == "" {
-		return errors.NotValidf("mysql schema is required. config is")
+		return errors.NotValidf("mysql schema is required. configs is")
 	}
 	return nil
 }

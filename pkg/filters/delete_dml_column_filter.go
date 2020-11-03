@@ -10,7 +10,7 @@ import (
 
 // [[filters]]
 // type = "delete-dml-column"
-// [[filters.config]]
+// [[filters.configs]]
 // match-schema = "test"
 // match-table = "test_table"
 // columns = ["e", "f"]

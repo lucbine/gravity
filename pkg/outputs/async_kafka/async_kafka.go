@@ -32,7 +32,7 @@ var (
 )
 
 type AsyncKafkaPluginConfig struct {
-	KafkaConfig    *config.KafkaGlobalConfig `mapstructure:"kafka-global-config" json:"kafka-global-config"`
+	KafkaConfig    *config.KafkaGlobalConfig `mapstructure:"kafka-global-configs" json:"kafka-global-configs"`
 	Routes         []map[string]interface{}  `mapstructure:"routes" json:"routes"`
 	OutputFormat   string                    `mapstructure:"output-format" json:"output-format"`
 	SchemaVersion  string                    `mapstructure:"schema-version" json:"schema-version"`
@@ -60,7 +60,7 @@ func init() {
 }
 
 func (output *AsyncKafka) Configure(pipelineName string, data map[string]interface{}) error {
-	// setup plugin config
+	// setup plugin configs
 	pluginConfig := AsyncKafkaPluginConfig{}
 
 	err := mapstructure.Decode(data, &pluginConfig)
@@ -69,7 +69,7 @@ func (output *AsyncKafka) Configure(pipelineName string, data map[string]interfa
 	}
 
 	if pluginConfig.KafkaConfig == nil {
-		return errors.Errorf("empty kafka config")
+		return errors.Errorf("empty kafka configs")
 	}
 
 	if len(pluginConfig.KafkaConfig.BrokerAddrs) == 0 {

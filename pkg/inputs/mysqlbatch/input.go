@@ -35,10 +35,10 @@ type TableConfig struct {
 }
 
 type PluginConfig struct {
-	Source      *config.DBConfig `mapstructure:"source" toml:"source" json:"source"` // keep same with mysql binlog config to make most cases simple
+	Source      *config.DBConfig `mapstructure:"source" toml:"source" json:"source"` // keep same with mysql binlog configs to make most cases simple
 	SourceSlave *config.DBConfig `mapstructure:"source-slave" toml:"source-slave" json:"source-slave"`
 
-	SourceProbeCfg *helper.SourceProbeCfg `mapstructure:"source-probe-config"json:"source-probe-config"`
+	SourceProbeCfg *helper.SourceProbeCfg `mapstructure:"source-probe-configs"json:"source-probe-configs"`
 
 	PositionRepo *config.GenericPluginConfig `mapstructure:"position-repo" toml:"position-repo" json:"position-repo"`
 

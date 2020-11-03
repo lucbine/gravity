@@ -126,12 +126,12 @@ func (c *Consumer) Partitions() <-chan PartitionConsumer { return c.partitions }
 
 // Errors returns a read channel of errors that occur during offset management, if
 // enabled. By default, errors are logged and not returned over this channel. If
-// you want to implement any custom error handling, set your config's
+// you want to implement any custom error handling, set your configs's
 // Consumer.Return.Errors setting to true, and read from this channel.
 func (c *Consumer) Errors() <-chan error { return c.errors }
 
 // Notifications returns a channel of Notifications that occur during consumer
-// rebalancing. Notifications will only be emitted over this channel, if your config's
+// rebalancing. Notifications will only be emitted over this channel, if your configs's
 // Group.Return.Notifications setting to true.
 func (c *Consumer) Notifications() <-chan *Notification { return c.notifications }
 

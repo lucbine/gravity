@@ -142,7 +142,7 @@ table = "test_source_*"
 # Make sure you know what you are doing: YOU NEED TO SPECIFY A COLUMN THAT HAVE A UNIQUE INDEX.
 scan-column = "id"
 
-# you can ignore talbes defined in input.config.table-configs
+configs
 # gravity do not support scan of these tables if it matches all of these condition:
 #
 # 1. do not have primary key

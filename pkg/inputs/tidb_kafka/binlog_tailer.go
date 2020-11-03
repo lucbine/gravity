@@ -314,7 +314,7 @@ func NewBinlogTailer(
 	// consumer related performance tuning
 	//
 	if srcKafkaCfg.Consumer == nil {
-		return nil, errors.Errorf("empty consumer config")
+		return nil, errors.Errorf("empty consumer configs")
 	}
 
 	d, err := time.ParseDuration(srcKafkaCfg.Consumer.Offsets.CommitInterval)
@@ -342,7 +342,7 @@ func NewBinlogTailer(
 
 	kafkaConfig.Consumer.MaxWaitTime = maxWaitDuration
 
-	log.Infof("[tidb_binlog_tailer] consumer config: sarama config: %v, pipeline config: %+v", kafkaConfig, srcKafkaCfg)
+	log.Infof("[tidb_binlog_tailer] consumer configs: sarama configs: %v, pipeline configs: %+v", kafkaConfig, srcKafkaCfg)
 
 	consumer, err := sarama_cluster.NewConsumer(
 		srcKafkaCfg.BrokerConfig.BrokerAddrs,

@@ -50,7 +50,7 @@ func TestConfigure(t *testing.T) {
 				"host":     "localhost",
 				"username": "root",
 			},
-			"sql-engine-config": &config.GenericPluginConfig{
+			"sql-engine-configs": &config.GenericPluginConfig{
 				Type: "mysql-insert-ignore",
 			},
 		}))

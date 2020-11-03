@@ -27,7 +27,7 @@ type Server struct {
 	PositionCache position_cache.PositionCacheInterface
 	Output        core.Output
 
-	// When Input is done, server will be closed, when config changed, server will also be closed;
+	// When Input is done, server will be closed, when configs changed, server will also be closed;
 	// add a lock here to prevent race condition
 	isClosed bool
 	sync.Mutex

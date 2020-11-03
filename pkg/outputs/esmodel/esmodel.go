@@ -109,7 +109,7 @@ func (output *EsModelOutput) Configure(pipelineName string, data map[string]inte
 	// setup output
 	output.pipelineName = pipelineName
 
-	// setup plugin config
+	// setup plugin configs
 	pluginConfig := EsModelPluginConfig{}
 
 	err := mapstructure.Decode(data, &pluginConfig)
@@ -119,7 +119,7 @@ func (output *EsModelOutput) Configure(pipelineName string, data map[string]inte
 
 	printJsonEncodef("pluginConfig: %s", pluginConfig)
 	if pluginConfig.ServerConfig == nil {
-		return errors.Errorf("empty esmodel config")
+		return errors.Errorf("empty esmodel configs")
 	}
 
 	if len(pluginConfig.ServerConfig.URLs) == 0 {

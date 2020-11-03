@@ -13,7 +13,7 @@ package padder
 //
 //	"database/sql"
 //
-//	"github.com/moiot/gravity/padder/config"
+//	"github.com/moiot/gravity/padder/configs"
 //	"github.com/moiot/gravity/padder/job_processor"
 //	"github.com/moiot/gravity/pkg/metrics"
 //	"github.com/moiot/gravity/pkg/schedulers/batch_table_scheduler"
@@ -35,7 +35,7 @@ package padder
 //	UnknownRatio    float64
 //}
 //
-//func Pad(padderConfig config.PadderConfig) error {
+//func Pad(padderConfig configs.PadderConfig) error {
 //	var scheduler core.Scheduler
 //	var worker *job_processor.MySQLWorker
 //
@@ -86,7 +86,7 @@ package padder
 //
 //func execute(
 //	scheduler core.Scheduler,
-//	mysqlConfig *config.MySQLConfig,
+//	mysqlConfig *configs.MySQLConfig,
 //	srcId string,
 //	store schema_store.SchemaStore,
 //	binlogList []string,
@@ -119,7 +119,7 @@ package padder
 //	return nil
 //}
 //
-//func getDB(mysqlConfig *config.MySQLConfig) (*schema_store.SimpleSchemaStore, *sql.DB, error) {
+//func getDB(mysqlConfig *configs.MySQLConfig) (*schema_store.SimpleSchemaStore, *sql.DB, error) {
 //	store, err := schema_store.NewSimpleSchemaStore(mysqlConfig.Target)
 //	if err != nil {
 //		return nil, nil, errors.Trace(err)
@@ -131,7 +131,7 @@ package padder
 //	return store, targetDB, nil
 //}
 //
-//func Preview(padderConfig config.PadderConfig) (PreviewStatistic, error) {
+//func Preview(padderConfig configs.PadderConfig) (PreviewStatistic, error) {
 //
 //	mysqlConfig := padderConfig.MySQLConfig
 //	store, db, err := getDB(mysqlConfig)

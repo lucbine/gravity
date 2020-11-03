@@ -13,7 +13,7 @@ package job_processor
 //
 // 	"github.com/moiot/gravity/pkg/core"
 //
-// 	"github.com/moiot/gravity/pkg/config"
+// 	"github.com/moiot/gravity/pkg/configs"
 // 	"github.com/moiot/gravity/pkg/mysql/job_msg"
 // 	mysqlUtils "github.com/moiot/gravity/pkg/mysql/utils"
 // 	"github.com/moiot/gravity/pkg/utils"
@@ -38,7 +38,7 @@ package job_processor
 // 	schemaName      string
 // 	srcId           string
 // 	schemaStore     schema_store.SchemaStore
-// 	tableConfigList []config.TableConfig
+// 	tableConfigList []configs.TableConfig
 // }
 //
 // func getLatestSequenceNumber() int64 {
@@ -75,7 +75,7 @@ package job_processor
 // 				return errors.Trace(errors.Annotatef(err, "[job_processor] failed to GetSchema"))
 // 			}
 // 			table := schema[tableName]
-// 			var tableConfig *config.TableConfig = nil
+// 			var tableConfig *configs.TableConfig = nil
 // 			for i, tc := range jobProcessor.tableConfigList {
 // 				if utils.Glob(tc.Schema, jobProcessor.schemaName) && utils.Glob(tc.Table, tableName) {
 // 					tableConfig = &jobProcessor.tableConfigList[i]
@@ -125,7 +125,7 @@ package job_processor
 // 	return nil
 // }
 //
-// func CreateInsertJobs(header *replication.EventHeader, ev *replication.RowsEvent, srcId string, table *schema_store.Table, pos gomysql.Position, gs gomysql.MysqlGTIDSet, tableConfig *config.TableConfig) ([]Job, error) {
+// func CreateInsertJobs(header *replication.EventHeader, ev *replication.RowsEvent, srcId string, table *schema_store.Table, pos gomysql.Position, gs gomysql.MysqlGTIDSet, tableConfig *configs.TableConfig) ([]Job, error) {
 // 	jobList := make([]Job, len(ev.Rows))
 // 	columns := table.Columns
 // 	pkColumns := job_msg.BuildPkColumns(table, tableConfig)
@@ -164,7 +164,7 @@ package job_processor
 // 	return jobList, nil
 // }
 //
-// func CreateUpdateJobs(header *replication.EventHeader, ev *replication.RowsEvent, srcId string, table *schema_store.Table, pos gomysql.Position, gs gomysql.MysqlGTIDSet, tableConfig *config.TableConfig) ([]Job, error) {
+// func CreateUpdateJobs(header *replication.EventHeader, ev *replication.RowsEvent, srcId string, table *schema_store.Table, pos gomysql.Position, gs gomysql.MysqlGTIDSet, tableConfig *configs.TableConfig) ([]Job, error) {
 // 	jobList := make([]Job, len(ev.Rows)/2)
 // 	columns := table.Columns
 // 	pkColumns := job_msg.BuildPkColumns(table, tableConfig)
@@ -217,7 +217,7 @@ package job_processor
 // }
 //
 // func CreateDeleteJobs(header *replication.EventHeader, ev *replication.RowsEvent, srcId string, table *schema_store.Table, pos gomysql.Position, gs gomysql.MysqlGTIDSet,
-// 	tableConfig *config.TableConfig) ([]Job, error) {
+// 	tableConfig *configs.TableConfig) ([]Job, error) {
 // 	jobList := make([]Job, len(ev.Rows))
 // 	columns := table.Columns
 // 	pkColumns := job_msg.BuildPkColumns(table, tableConfig)
@@ -260,7 +260,7 @@ package job_processor
 // }
 //
 // func processRowsEvent(header *replication.EventHeader, ev *replication.RowsEvent, srcId string, table *schema_store.Table,
-// 	pos gomysql.Position, gs gomysql.MysqlGTIDSet, tableConfig *config.TableConfig) ([]Job, error) {
+// 	pos gomysql.Position, gs gomysql.MysqlGTIDSet, tableConfig *configs.TableConfig) ([]Job, error) {
 // 	eventType := header.EventType
 // 	log.Debugf("[job_processor] process rows event started. event type: %v", eventType)
 // 	var jobList []Job

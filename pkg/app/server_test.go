@@ -75,47 +75,47 @@ func TestServerConfigStructureV3(t *testing.T) {
 type = "mysql"
 mode = "replication"
 
-[input.config]
+[input.configs]
 nr-scanner = 10
 table-scan-batch = 10000
 
-[input.config.source]
+[input.configs.source]
 host = "127.0.0.1"
 username = "drc"
 password = ""
 port = 3306
 
-[[input.config.table-configs]]
+[[input.configs.table-configs]]
 schema = "test_1"
 table = "test_source_*"
 
-[[input.config.table-configs]]
+[[input.configs.table-configs]]
 schema = "test_2"
 table = "test_source_*"
 
 [[filters]]
 type = "reject"
 
-[filters.config]
+[filters.configs]
 match-schema = "test"
 match-table = "test_table_*"
 
 [[filters]]
 type = "reject"
 
-[filters.config]
+[filters.configs]
 match-dml-op = ["insert", "update", "delete"]
 
 [output]
 type = "mysql"
 
-[output.config.target]
+[output.configs.target]
 host = "127.0.0.1"
 username = "root"
 password = ""
 port = 3306
 
-[[output.config.routes]]
+[[output.configs.routes]]
 match-schema = "test"
 match-table = "test_source_table"
 target-schema = "test"
@@ -123,7 +123,7 @@ target-table = "test_target_table"
 
 [scheduler]
 type = "batch-table-scheduler"
-[scheduler.config]
+[scheduler.configs]
 nr-worker = 2
 batch-size = 1
 queue-size = 1024

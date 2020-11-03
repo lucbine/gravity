@@ -27,7 +27,7 @@ const (
 	defaultLogLevel      = log.InfoLevel
 )
 
-// FileLogConfig serializes file log related config in toml/json.
+// FileLogConfig serializes file log related configs in toml/json.
 type FileLogConfig struct {
 	// Filename Log filename, leave empty to disable file log.
 	Filename string `toml:"filename" json:"filename"`
@@ -44,7 +44,7 @@ type FileLogConfig struct {
 	Compress bool `toml:"compress" json:"compress"`
 }
 
-// LogConfig serializes log related config in toml/json.
+// LogConfig serializes log related configs in toml/json.
 type LogConfig struct {
 	// Level Log level.
 	Level string `toml:"level" json:"level"`
@@ -52,9 +52,9 @@ type LogConfig struct {
 	Format string `toml:"format" json:"format"`
 	// DisableTimestamp Disable automatic timestamps in output.
 	DisableTimestamp bool `toml:"disable-timestamp" json:"disable-timestamp"`
-	// File log config.
+	// File log configs.
 	File FileLogConfig `toml:"file" json:"file"`
-	// SlowQueryFile filename, default to File log config on empty.
+	// SlowQueryFile filename, default to File log configs on empty.
 	SlowQueryFile string
 }
 
@@ -248,7 +248,7 @@ func initFileLog(cfg *FileLogConfig, logger *log.Logger) error {
 	return nil
 }
 
-// SlowQueryLogger is used to log slow query, InitLogger will modify it according to config file.
+// SlowQueryLogger is used to log slow query, InitLogger will modify it according to configs file.
 var SlowQueryLogger = log.StandardLogger()
 
 func InitLogger(cfg *LogConfig) error {

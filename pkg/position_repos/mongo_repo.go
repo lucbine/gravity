@@ -75,9 +75,9 @@ type MongoPositionRet struct {
 }
 
 //
-// [input.config.position-repo]
+// [input.configs.position-repo]
 // type = "mongo-repo"
-// [input.config.position-repo.config]
+// [input.configs.position-repo.configs]
 // host = ...
 // port = ...
 //

@@ -138,7 +138,7 @@ func (tailer *OplogTailer) Run() {
 	options.UpdateDataAsDelta = true
 
 	if tailer.gtmConfig != nil {
-		log.Infof("[oplog_tailer] gtm-config: %v", tailer.gtmConfig)
+		log.Infof("[oplog_tailer] gtm-configs: %v", tailer.gtmConfig)
 		if tailer.gtmConfig.BufferSize > 0 {
 			options.BufferSize = tailer.gtmConfig.BufferSize
 		}

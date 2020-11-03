@@ -58,10 +58,10 @@ func main() {
 
 	if cfg.ConfigFile != "" {
 		if err := cfg.ConfigFromFile(cfg.ConfigFile); err != nil {
-			log.Fatalf("failed to load config from file: %v", errors.ErrorStack(err))
+			log.Fatalf("failed to load configs from file: %v", errors.ErrorStack(err))
 		}
 	} else {
-		log.Fatal("config must not be empty")
+		log.Fatal("configs must not be empty")
 	}
 
 	content, err := ioutil.ReadFile(cfg.ConfigFile)
@@ -154,20 +154,20 @@ func main() {
 				continue
 			}
 
-			log.Info("config file event: ", event.String())
+			log.Info("configs file event: ", event.String())
 
 			content, err := ioutil.ReadFile(cfg.ConfigFile)
 			if err != nil {
-				log.Infof("read config error: %s", err)
+				log.Infof("read configs error: %s", err)
 			} else {
 				newHash := core.HashConfig(string(content))
 				if newHash == hash {
-					log.Infof("config not changed")
+					log.Infof("configs not changed")
 					continue
 				}
 			}
 
-			log.Info("config file updated, quit...")
+			log.Info("configs file updated, quit...")
 			server.Close()
 			os.Exit(1)
 

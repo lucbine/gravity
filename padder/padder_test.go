@@ -12,7 +12,7 @@ package padder
 //	"github.com/siddontang/go-mysql/mysql"
 //	"github.com/siddontang/go-mysql/replication"
 //
-//	"github.com/moiot/gravity/padder/config"
+//	"github.com/moiot/gravity/padder/configs"
 //	"github.com/moiot/gravity/pkg/mysql_test"
 //	"github.com/moiot/gravity/pkg/utils"
 //)
@@ -40,7 +40,7 @@ package padder
 //binlog-name= "bin.001"
 //binlog-pos= 1234`
 //
-//func buildBinLogList(mysqlConfig config.MySQLConfig, mysqlPosition utils.MySQLBinlogPosition, query func()) ([]string, error) {
+//func buildBinLogList(mysqlConfig configs.MySQLConfig, mysqlPosition utils.MySQLBinlogPosition, query func()) ([]string, error) {
 //	syncerConfig := replication.BinlogSyncerConfig{
 //		ServerID:  utils.GenerateRandomServerID(),
 //		Flavor:    "mysql",
@@ -81,19 +81,19 @@ package padder
 //
 //}
 //
-//func testPreview(padderConfig config.PadderConfig, verify func(stats PreviewStatistic)) {
+//func testPreview(padderConfig configs.PadderConfig, verify func(stats PreviewStatistic)) {
 //	stats, err := Preview(padderConfig)
 //	Expect(err).To(BeNil())
 //	verify(stats)
 //}
 //
-//func testPad(padderConfig config.PadderConfig, verify func()) {
+//func testPad(padderConfig configs.PadderConfig, verify func()) {
 //	err := Pad(padderConfig)
 //	Expect(err).To(BeNil())
 //	verify()
 //}
 //
-//func getPadderConfig(sourceDB *sql.DB, srcConf config.MySQLConfig, targetConf config.MySQLConfig, enableDelete bool, query func()) config.PadderConfig {
+//func getPadderConfig(sourceDB *sql.DB, srcConf configs.MySQLConfig, targetConf configs.MySQLConfig, enableDelete bool, query func()) configs.PadderConfig {
 //	db := utils.NewMySQLDB(sourceDB)
 //	srcPosition, srcGtidSet, err := db.GetMasterStatus()
 //	srcMysqlPosition := utils.MySQLBinlogPosition{
@@ -105,7 +105,7 @@ package padder
 //	Expect(err).To(BeNil())
 //
 //	targetConf.StartPosition = &srcMysqlPosition
-//	return config.PadderConfig{
+//	return configs.PadderConfig{
 //		BinLogList:   binLogs,
 //		MySQLConfig:  &targetConf,
 //		EnableDelete: enableDelete,
@@ -119,18 +119,18 @@ package padder
 //		sourceDB := mysql_test.MustSetupSourceDB(dbName)
 //		targetDB := mysql_test.MustSetupTargetDB(dbName)
 //		count := 4
-//		var sourceMysqlConfig *config.MySQLConfig
-//		var targetMysqlConfig *config.MySQLConfig
+//		var sourceMysqlConfig *configs.MySQLConfig
+//		var targetMysqlConfig *configs.MySQLConfig
 //		var idList []int
 //		for id := 0; id < count; id++ {
 //			idList = append(idList, id)
 //		}
 //		oldName := "oldName"
 //		newName := "newName"
-//		setupConfig := func() (*config.MySQLConfig, *config.MySQLConfig) {
-//			srcConfig, err := config.CreateConfigFromString(srcConfStr)
+//		setupConfig := func() (*configs.MySQLConfig, *configs.MySQLConfig) {
+//			srcConfig, err := configs.CreateConfigFromString(srcConfStr)
 //			Expect(err).To(BeNil())
-//			targetConfig, err := config.CreateConfigFromString(targetConfStr)
+//			targetConfig, err := configs.CreateConfigFromString(targetConfStr)
 //			Expect(err).To(BeNil())
 //			srcMysqlConfig := srcConfig.PadderConfig.MySQLConfig
 //			trgtMysqlConfig := targetConfig.PadderConfig.MySQLConfig
@@ -231,8 +231,8 @@ package padder
 //			sourceDB := mysql_test.MustSetupSourceDB(sourceDBName)
 //			targetDB := mysql_test.MustSetupTargetDB(targetDBName)
 //			count := 4
-//			var sourceMysqlConfig *config.MySQLConfig
-//			var targetMysqlConfig *config.MySQLConfig
+//			var sourceMysqlConfig *configs.MySQLConfig
+//			var targetMysqlConfig *configs.MySQLConfig
 //			var idList []int
 //			for id := 0; id < count; id++ {
 //				idList = append(idList, id)
@@ -384,18 +384,18 @@ package padder
 //		sourceDB := mysql_test.MustSetupSourceDB(dbName)
 //		targetDB := mysql_test.MustSetupTargetDB(dbName)
 //		count := 4
-//		var sourceMysqlConfig *config.MySQLConfig
-//		var targetMysqlConfig *config.MySQLConfig
+//		var sourceMysqlConfig *configs.MySQLConfig
+//		var targetMysqlConfig *configs.MySQLConfig
 //		var idList []int
 //		for id := 0; id < count; id++ {
 //			idList = append(idList, id)
 //		}
 //		oldName := "oldName"
 //		newName := "newName"
-//		setupConfig := func() (*config.MySQLConfig, *config.MySQLConfig) {
-//			srcConfig, err := config.CreateConfigFromString(srcConfStr)
+//		setupConfig := func() (*configs.MySQLConfig, *configs.MySQLConfig) {
+//			srcConfig, err := configs.CreateConfigFromString(srcConfStr)
 //			Expect(err).To(BeNil())
-//			targetConfig, err := config.CreateConfigFromString(targetConfStr)
+//			targetConfig, err := configs.CreateConfigFromString(targetConfStr)
 //			Expect(err).To(BeNil())
 //			srcMysqlConfig := srcConfig.PadderConfig.MySQLConfig
 //			trgtMysqlConfig := targetConfig.PadderConfig.MySQLConfig

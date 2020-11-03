@@ -69,7 +69,7 @@ entry:
 			}
 			close(s.ResultChan)
 			break entry
-			//TODO graceful Shutdown
+			//TODO grace Shutdown
 		default:
 			srcSegment, ok := <-s.buffers[0].OutputChan
 			if !ok {

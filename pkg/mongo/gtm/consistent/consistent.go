@@ -14,9 +14,9 @@ type ConfigOptions struct {
 	Workers []string
 }
 
-var EmptyWorkers = errors.New("config not found or workers empty")
+var EmptyWorkers = errors.New("configs not found or workers empty")
 var InvalidWorkers = errors.New("workers must be an array of string")
-var WorkerMissing = errors.New("the specified worker was not found in the config")
+var WorkerMissing = errors.New("the specified worker was not found in the configs")
 
 // ConsistentHashFilterFromFile returns an operation filter which uses a consistent hash to determine
 // if the operation will be accepted for processing. can be used to distribute work.

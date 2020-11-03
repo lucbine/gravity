@@ -319,7 +319,7 @@ package job_processor
 // 	mysqlConfig := utils.DBConfig{}
 // 	_, err := toml.Decode(sourceConfig, &mysqlConfig)
 // 	if err != nil {
-// 		Fail("failed to get config: " + err.Error())
+// 		Fail("failed to get configs: " + err.Error())
 // 	}
 // 	store, err := s.NewSimpleSchemaStore(&mysqlConfig)
 // 	if err != nil {

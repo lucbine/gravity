@@ -243,7 +243,7 @@ func NewEngineExecutor(pipelineName string, engineName string, db *sql.DB, data 
 
 	err = p.Configure(pipelineName, data)
 	if err != nil {
-		logrus.Fatalf("[mysqlReplaceEngine] failed to config")
+		logrus.Fatalf("[mysqlReplaceEngine] failed to configs")
 	}
 
 	i, ok := p.(EngineInitializer)
